@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'constants.dart';
+import 'test_veri.dart';
 
 void main() => runApp(BilgiTesti());
 
@@ -26,7 +27,8 @@ class SoruSayfasi extends StatefulWidget {
 class _SoruSayfasiState extends State<SoruSayfasi> {
   @override
   List<Widget> secimler = [];
-  List<String> sorular = [
+  /*
+     List<String> sorular = [
     "Titanic gelmiş geçmiş en büyük gemidir",
     "Dünyadaki tavuk sayısı insan sayısından fazladır",
     "Kelebeklerin ömrü bir gündür",
@@ -36,9 +38,43 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
     "Fransızlar 80 demek için, 4 - 20 der"
   ];
   List<bool> yanitlar = [false, true, false, false, true, true, true];
-  int soruSayac = 0;
+  */
 
-  Soru soru_1=new Soru();
+  TestVeri test_1 = new TestVeri();
+  //RandomSoru test_1_random = new RandomSoru();
+
+  void butonFonksiyon(bool secim) {
+    if (test_1.TestBittiMi == true) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          // return object of type Dialog
+          return AlertDialog(
+            title: new Text("Alert Dialog title"),
+            content: new Text("Alert Dialog body"),
+            actions: <Widget>[
+              // usually buttons at the bottom of the dialog
+              new MaterialButton(
+                child: new Text("Close"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      secimler = [];
+      test_1.TestiSifirla();
+    }
+    setState(() {
+      test_1.getSoruYaniti() == secim
+          ? secimler.add(kDogruIconu)
+          : secimler.add(kYanlisIconu);
+      test_1.sonrakiSoru();
+    });
+  }
+
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,7 +86,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                sorular[soruSayac],
+                test_1.getSoruMetni(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20.0,
@@ -84,12 +120,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                             size: 30.0,
                           ),
                           onPressed: () {
-                            setState(() {
-                              yanitlar[soruSayac] == false
-                                  ? secimler.add(kDogruIconu)
-                                  : secimler.add(kYanlisIconu);
-                              soruSayac++;
-                            });
+                            butonFonksiyon(false);
                           },
                         ))),
                 Expanded(
@@ -101,12 +132,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                           color: Colors.green[400],
                           child: Icon(Icons.thumb_up, size: 30.0),
                           onPressed: () {
-                            setState(() {
-                              yanitlar[soruSayac] == true
-                                  ? secimler.add(kDogruIconu)
-                                  : secimler.add(kYanlisIconu);
-                              soruSayac++;
-                            });
+                            butonFonksiyon(true);
                           },
                         ))),
               ])),
@@ -114,11 +140,4 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
       ],
     );
   }
-}
-
-class Soru {
-  var soruMetni;
-  var soruYaniti;
-
-  Soru({@required this.soruMetni,@required this.soruYaniti});
 }
