@@ -46,8 +46,6 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
 
   void butonFonksiyon(bool secim) {
     if (test_1.TestBittiMi()) {
-      secimler = [];
-      test_1.TestiSifirla();
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -61,6 +59,10 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                 child: new Text("Close"),
                 onPressed: () {
                   Navigator.of(context).pop();
+                  setState(() {
+                    secimler = [];
+                    test_1.TestiSifirla();
+                  });
                 },
               ),
             ],
