@@ -41,6 +41,10 @@ class TestVeri {
     }
   }
 
+  int getSoruIndex() {
+    return _soruIndex;
+  }
+
   bool TestBittiMi() {
     if (_soruIndex >= _soruBankasi.length - 1) {
       return true;

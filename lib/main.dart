@@ -28,6 +28,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
   @override
   List<Widget> secimler = [];
   /*
+
      List<String> sorular = [
     "Titanic gelmiş geçmiş en büyük gemidir",
     "Dünyadaki tavuk sayısı insan sayısından fazladır",
@@ -44,14 +45,16 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
   //RandomSoru test_1_random = new RandomSoru();
 
   void butonFonksiyon(bool secim) {
-    if (test_1.TestBittiMi == true) {
+    if (test_1.TestBittiMi()) {
+      secimler = [];
+      test_1.TestiSifirla();
       showDialog(
         context: context,
         builder: (BuildContext context) {
           // return object of type Dialog
           return AlertDialog(
-            title: new Text("Alert Dialog title"),
-            content: new Text("Alert Dialog body"),
+            title: new Text("Test Sona Erdi."),
+            content: new Text("Başa Dönmek için kapatıp devam edebilirsiniz."),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
               new MaterialButton(
@@ -64,15 +67,16 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
           );
         },
       );
-      secimler = [];
-      test_1.TestiSifirla();
+    } else {
+      setState(() {
+        if (test_1.getSoruYaniti() == secim) {
+          secimler.add(kDogruIconu);
+        } else {
+          secimler.add(kYanlisIconu);
+        }
+        test_1.sonrakiSoru();
+      });
     }
-    setState(() {
-      test_1.getSoruYaniti() == secim
-          ? secimler.add(kDogruIconu)
-          : secimler.add(kYanlisIconu);
-      test_1.sonrakiSoru();
-    });
   }
 
   Widget build(BuildContext context) {
