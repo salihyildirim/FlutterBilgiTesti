@@ -52,10 +52,6 @@ class TestVeri {
       return false;
     }
   }
-
-  void TestiSifirla() {
-    _soruIndex = 0;
-  }
 }
 
 class RandomSoru extends TestVeri {
