@@ -1,6 +1,6 @@
 # bilgitesti
 
-A new Flutter project.
+doğru - yanlış test
 
 ## Getting Started
 
@@ -14,3 +14,6 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+![weather-app_readme](https://user-images.githubusercontent.com/15340571/221376658-9bbb2de3-4f17-44f9-9ded-3e91c44e0704.png)
